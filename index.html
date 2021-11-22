@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./assets/css/style.css">
+</head>
+<body>
+    <div class="img-slider">
+        <div class="slide active">
+            <img src="https://cdn.pixabay.com/photo/2021/08/26/18/18/flower-6576831_960_720.jpg" alt="">
+            <div class="info">
+                <h2>Slide 1</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit</p>
+            </div>
+        </div>
+        <div class="slide">
+            <img src="https://cdn.pixabay.com/photo/2021/08/25/20/42/field-6574455_960_720.jpg" alt="">
+            <div class="info">
+                <h2>Slide 2</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit</p>
+            </div>
+        </div>
+        <div class="slide">
+            <img src="https://cdn.pixabay.com/photo/2021/08/26/20/53/bird-6577119_960_720.jpg" alt="">
+            <div class="info">
+                <h2>Slide 3</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit</p>
+            </div>
+        </div>
+        <div class="slide">
+            <img src="https://cdn.pixabay.com/photo/2021/08/26/14/31/flower-6576240_960_720.jpg" alt="">
+            <div class="info">
+                <h2>Slide 4</h2>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit</p>
+            </div>
+        </div>
+        <div class="navigation">
+            <div class="btn active"></div>
+            <div class="btn"></div>
+            <div class="btn"></div>
+            <div class="btn"></div>
+        </div>
+    </div>
+    <script>
+        var slides = document.querySelectorAll('.slide');
+        var btns = document.querySelectorAll('.btn');
+        
+        btns.forEach((btn,i)=> {
+            btn.onclick = function() {
+                btns.forEach((btn)=>{
+                    btn.classList.remove('active')
+                })
+
+                slides.forEach((btn)=>{
+                    btn.classList.remove('active')
+                })
+                handleNextSlide(i)
+                
+            }
+        })
+        function handleNextSlide(i) {
+            slides[i].classList.add('active');
+            btns[i].classList.add('active');
+
+        }
+        var repeat = function(){
+            let active = document.getElementsByClassName('active');
+            console.log(active);
+            let i = 0;
+
+            var repeater = ()=>{
+                setTimeout(function(){
+                    [...active].forEach((activeElement)=>{
+                        activeElement.classList.remove('active');
+                        console.log(activeElement);
+                    })
+                    
+                    slides[i].classList.add('active');
+                    btns[i].classList.add('active');
+                    ++i;
+                    console.log(i)
+                    
+
+                    if( slides.length == i) {
+                        i = 0;
+                    }
+                    if(i >= slides.length ) return;
+                    
+                    repeater();
+                },3000)
+            }
+            repeater();
+        }
+        repeat();
+    </script>
+</body>
+</html>
